@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberSphere - CS Club Activity</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #00ffff;
+    }
+
+    .intro {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-left: 5px solid #00ffff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .intro p {
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.07);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      flex: 1 1 250px;
+      max-width: 300px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .card p {
+      color: #ddd;
+      font-size: 0.95rem;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      color: #a0f0ff;
+      font-size: 1.1rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      background-color: #1c2a3b;
+      margin: 15% auto;
+      padding: 30px;
+      border: 1px solid #00ffff;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      color: white;
+    }
+
+    .modal-content h3 {
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CyberSphere</h1>
+
+    <div class="intro">
+      <p><strong>We warmly welcome you to be a part of the Computer Science Club Activity for Group A (Classes XI & XII), scheduled on 12th August 2025, during the 5th and 6th periods in the School Auditorium.</strong></p>
+      <p>This event will feature an exciting mix of activities including a spontaneous debate session, a startup pitch challenge, a connection-based logic thinking game, and a trivia — all designed to ignite curiosity, creativity, and collaboration among our students.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card" onclick="openModal('Web Wisdom')">
+        <h2>❓ Web Wisdom</h2>
+        <p>A high-paced quiz session where knowledge meets speed. Participants will face rounds of tech, logic, and pop culture trivia — the fastest minds win!</p>
+      </div>
+      <div class="card" onclick="openModal('Mind Wrestle')">
+        <h2>🧠 Mind Wrestle</h2>
+        <p>A unique debate experience where teams are challenged to switch perspectives mid-discussion. Can you argue both sides of the coin with equal flair?</p>
+      </div>
+      <div class="card" onclick="openModal('devjam')">
+        <h2>💡 Dev Jam</h2>
+        <p>Pitch your creative app ideas in front of our mini 'Sharks'. From concept to execution, impress us with innovation and practicality.</p>
+      </div>
+      <div class="card" onclick="openModal('linked')">
+        <h2>🔗 LinkedIN</h2>
+        <p>CThe ultimate logic game. You'll be shown 4 images — can you guess the hidden connection? It's trickier than you think!</p>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Your presence would truly encourage our participants and add great value to the event.
+    </div>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modal-title");
+    const desc = document.getElementById("modal-desc");
+
+    const activityDetails = {
+      Web Wisdom: {
+        title: "",
+        desc: "A high-paced quiz session where knowledge meets speed. Participants will face rounds of tech, logic, and pop culture trivia — the fastest minds win!"
+      },
+      argumented: {
+        title: " Mind Wrestle ",
+        desc: "A unique debate experience where teams are challenged to switch perspectives mid-discussion. Can you argue both sides of the coin with equal flair?"
+      },
+      devjam: {
+        title: "Dev Jam",
+        desc: "Pitch your creative app ideas in front of our mini 'Sharks'. From concept to execution, impress us with innovation and practicality."
+      },
+      linked: {
+        title: "LinkedIN",
+        desc: "The ultimate logic game. You'll be shown 4 images — can you guess the hidden connection? It's trickier than you think!"
+      }
+    };
+
+    function openModal(activity) {
+      title.textContent = activityDetails[activity].title;
+      desc.textContent = activityDetails[activity].desc;
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+</html>
